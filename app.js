@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression');
 // eslint-disable-next-line import/extensions
 const cookieParser = require('cookie-parser');
 // eslint-disable-next-line import/extensions
@@ -96,6 +97,7 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
+app.use(compression());
 // Body parser , Reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 // Parse Cookie header and populate req.cookies
