@@ -1,0 +1,38 @@
+extends base
+
+block content
+    main.main
+        .my-review-container
+            h2.heading-secondary.my-review-title My Reviews
+
+            if reviews.length > 0
+                .my-review-list
+                    each review in reviews
+                        .my-review-item
+                            .my-review-details
+                                .my-review-tour-name #{review.tour.name}
+                                br
+                                | Review: #{review.review}
+                                br
+                                .my-review-rating Rating: 
+                                each star in Array(review.rating)
+                                    | ⭐
+                                br
+                                .my-review-created-at Created At: #{new Date(review.createdAt).toLocaleDateString()}
+
+            else
+                .my-review-details
+                    No reviews found. You have not submitted any reviews yet.
+
+        script.
+            function deleteReview(id) {
+                if (confirm('Are you sure you want to delete this review?')) {
+                    axios.delete(`/reviews/${id}`)
+                        .then(response => {
+                            location.reload();
+                        })
+                        .catch(error => {
+                            console.error('Error deleting review:', error);
+                            alert('An error occurred while deleting the review.');
+                        });
+            }
