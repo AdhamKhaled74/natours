@@ -9,6 +9,15 @@ const catchAsync = require('./../utils/catchAsync.js');
 // eslint-disable-next-line import/extensions
 const AppError = require('./../utils/appError.js');
 
+exports.alerts = (req, res, next) => {
+  const { alert } = req.query;
+  if (alert === 'booking') {
+    res.locals.alert =
+      'Your booking was successful! Please check your bookings in your account.';
+  }
+  next();
+};
+
 exports.getOverview = catchAsync(async (req, res, next) => {
   //1) get your data from collection
   const tours = await Tour.find();

@@ -6,6 +6,7 @@ const authController = require('./../controllers/authController');
 // eslint-disable-next-line import/no-unresolved, node/no-missing-require
 const BookingController = require('./../controllers/bookingController');
 
+router.use(viewsController.alerts);
 router.get(
   '/',
   BookingController.createBookingCheckout,
