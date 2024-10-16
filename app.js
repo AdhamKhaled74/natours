@@ -11,6 +11,7 @@ const hpp = require('hpp');
 const compression = require('compression');
 // eslint-disable-next-line import/extensions
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 // eslint-disable-next-line import/extensions
 const AppError = require('./utils/appError.js');
 // eslint-disable-next-line import/extensions
@@ -24,11 +25,13 @@ const bookingRouter = require(`./routes/bookingRoutes.js`);
 
 const app = express();
 
+app.enable('trust proxy');
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // GLOBAL MIDDLEWARES
-
+// Implement CORS
+app.use(cors());
 // Serving static files
 // app.use(express.static(`${__dirname}/public`)); the same with line 66
 app.use(express.static(path.join(__dirname, 'public')));
