@@ -22,6 +22,8 @@ const userRouter = require(`./routes/userRoutes.js`);
 const reviewRouter = require(`./routes/reviewRoutes.js`);
 const viewRouter = require(`./routes/viewRoutes.js`);
 const bookingRouter = require(`./routes/bookingRoutes.js`);
+// eslint-disable-next-line import/extensions
+const bookingController = require('./controllers/bookingController.js');
 
 const app = express();
 
@@ -98,8 +100,13 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again in an hour!'
 });
-app.use('/api', limiter);
 
+app.use('/api', limiter);
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 app.use(compression());
 // Body parser , Reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));

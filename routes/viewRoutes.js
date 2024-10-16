@@ -17,7 +17,7 @@ router.get('/login', viewsController.getLoginForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 router.get(
   '/my-tours',
-  BookingController.createBookingCheckout,
+  // BookingController.createBookingCheckout,
   authController.protect,
   viewsController.getMyTours
 );
