@@ -56,7 +56,8 @@ app.use(
           'https://*.mapbox.com',
           'https://js.stripe.com',
           'https://m.stripe.network',
-          'https://*.cloudflare.com'
+          'https://*.cloudflare.com',
+          'https://vercel.live'
         ],
         frameSrc: ["'self'", 'https://js.stripe.com'],
         objectSrc: ["'none'"],
