@@ -17,13 +17,15 @@ const AppError = require('./utils/appError.js');
 // eslint-disable-next-line import/extensions
 const globalErrorHandler = require('./controllers/errorController.js');
 
+// eslint-disable-next-line import/extensions
+const bookingController = require('./controllers/bookingController.js');
+
 const tourRouter = require(`./routes/tourRoutes.js`);
 const userRouter = require(`./routes/userRoutes.js`);
 const reviewRouter = require(`./routes/reviewRoutes.js`);
 const viewRouter = require(`./routes/viewRoutes.js`);
 const bookingRouter = require(`./routes/bookingRoutes.js`);
 // eslint-disable-next-line import/extensions
-// const bookingController = require('./controllers/bookingController.js');
 
 const app = express();
 
@@ -102,11 +104,11 @@ const limiter = rateLimit({
 });
 
 app.use('/api', limiter);
-// app.use(
-//   '/webhook-checkout',
-//   express.raw({ type: 'application/json' }),
-//   bookingController.webhookCheckout
-// );
+app.use(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 app.use(compression());
 // Body parser , Reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
