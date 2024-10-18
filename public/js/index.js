@@ -28,7 +28,7 @@ const signup = async (name, email, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:5000/api/v1/users/signup',
+      url: '/api/v1/users/signup',
       data: {
         name,
         email,
@@ -53,7 +53,7 @@ const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: 'http://localhost:5000/api/v1/users/logout'
+      url: '/api/v1/users/logout'
       // withCredentials: true // Include credentials such as cookies
     });
     if (res.data.status === 'success') {
@@ -69,8 +69,8 @@ const updateSettings = async (data, type) => {
   try {
     const url =
       type === 'password'
-        ? 'http://localhost:5000/api/v1/users/updateMyPassword'
-        : 'http://localhost:5000/api/v1/users/updateMe';
+        ? '/api/v1/users/updateMyPassword'
+        : '/api/v1/users/updateMe';
     const res = await axios({
       method: 'PATCH',
       url,
@@ -91,7 +91,7 @@ const bookTour = async tourId => {
   try {
     // 1) Get checkout session from API
     const session = await axios(
-      `http://localhost:5000/api/v1/bookings/checkout-session/${tourId}`
+      `/api/v1/bookings/checkout-session/${tourId}`
     );
     console.log(session);
     // 2. Create checkout form + charge credit card
