@@ -4,9 +4,9 @@
   "description": "Learning node, express and mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "prod": "set NODE_ENV=production&& nodemon server.js",
-    "debug": "ndb server.js"
+    "start": "nodemon index.js",
+    "prod": "set NODE_ENV=production&& nodemon index.js",
+    "debug": "ndb index.js"
   },
   "author": "Adham Khaled",
   "license": "ISC",
