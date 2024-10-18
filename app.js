@@ -41,55 +41,55 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set security HTTP Headers
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'", 'data:', 'blob:', 'https:', 'ws:'],
-        baseUri: ["'self'"],
-        fontSrc: ["'self'", 'https:', 'data:'],
-        scriptSrc: [
-          "'self'",
-          'https:',
-          'http:',
-          'blob:',
-          'https://*.mapbox.com',
-          'https://js.stripe.com',
-          'https://m.stripe.network',
-          'https://*.cloudflare.com',
-          'https://vercel.live'
-        ],
-        frameSrc: ["'self'", 'https://js.stripe.com'],
-        objectSrc: ["'none'"],
-        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-        workerSrc: [
-          "'self'",
-          'data:',
-          'blob:',
-          'https://*.tiles.mapbox.com',
-          'https://api.mapbox.com',
-          'https://events.mapbox.com',
-          'https://m.stripe.network'
-        ],
-        childSrc: ["'self'", 'blob:'],
-        imgSrc: ["'self'", 'data:', 'blob:'],
-        formAction: ["'self'"],
-        connectSrc: [
-          "'self'",
-          "'unsafe-inline'",
-          'data:',
-          'blob:',
-          'https://*.stripe.com',
-          'https://*.mapbox.com',
-          'https://*.cloudflare.com/',
-          'https://bundle.js:*',
-          'ws://localhost:*/'
-        ],
-        upgradeInsecureRequests: []
-      }
-    }
-  })
-);
+app.use(helmet());
+//{
+//   contentSecurityPolicy: {
+//     directives: {
+//       defaultSrc: ["'self'", 'data:', 'blob:', 'https:', 'ws:'],
+//       baseUri: ["'self'"],
+//       fontSrc: ["'self'", 'https:', 'data:'],
+//       scriptSrc: [
+//         "'self'",
+//         'https:',
+//         'http:',
+//         'blob:',
+//         'https://*.mapbox.com',
+//         'https://js.stripe.com',
+//         'https://m.stripe.network',
+//         'https://*.cloudflare.com',
+//         'https://vercel.live'
+//       ],
+//       frameSrc: ["'self'", 'https://js.stripe.com'],
+//       objectSrc: ["'none'"],
+//       styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+//       workerSrc: [
+//         "'self'",
+//         'data:',
+//         'blob:',
+//         'https://*.tiles.mapbox.com',
+//         'https://api.mapbox.com',
+//         'https://events.mapbox.com',
+//         'https://m.stripe.network',
+//         'https://vercel.live'
+//       ],
+//       childSrc: ["'self'", 'blob:'],
+//       imgSrc: ["'self'", 'data:', 'blob:'],
+//       formAction: ["'self'"],
+//       connectSrc: [
+//         "'self'",
+//         "'unsafe-inline'",
+//         'data:',
+//         'blob:',
+//         'https://*.stripe.com',
+//         'https://*.mapbox.com',
+//         'https://*.cloudflare.com/',
+//         'https://bundle.js:*',
+//         'ws://localhost:*/'
+//       ],
+//       upgradeInsecureRequests: []
+//     }
+//   }
+// })
 
 // Development Logging
 console.log(process.env.NODE_ENV);
