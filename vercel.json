@@ -1,13 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "index.js", "use": "@vercel/node" }],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "headers": {
-        "content-security-policy-report-only": "font-src * 'unsafe-inline';"
-      },
-      "dest": "/"
-    }
-  ]
+  "routes": [{ "src": "/(.*)", "dest": "/" }]
 }
