@@ -96,18 +96,18 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 
   // 3) Create session as response
-  if (!req.user.isConfirmed) {
-    //  return res.status(403).json({
-    //    status: 'error',
-    //    message: 'Please confirm your account before booking.',
-    //  });
-    return next(
-      new AppError(
-        'Please confirm your account before booking! check your profile.',
-        400
-      )
-    );
-  }
+  // if (!req.user.isConfirmed) {
+  //   //  return res.status(403).json({
+  //   //    status: 'error',
+  //   //    message: 'Please confirm your account before booking.',
+  //   //  });
+  //   return next(
+  //     new AppError(
+  //       'Please confirm your account before booking! check your profile.',
+  //       400
+  //     )
+  //   );
+  // }
   res.status(200).json({
     status: 'success',
     session
