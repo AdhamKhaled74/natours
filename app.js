@@ -40,9 +40,62 @@ app.use(express.static(path.join(__dirname, 'public'))); // Serving static files
 // 1) set Security HTTP headers
 
 // our app.use take a function not a call of function but this call will return a function
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true, // Use default directives from Helmet as a base
+      directives: {
+        defaultSrc: ["'self'", 'data:', 'blob:', 'https:', 'ws:'],
+        baseUri: ["'self'"],
+        fontSrc: ["'self'", 'https:', 'data:'],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'", // Allow inline scripts (required by some libraries)
+          "'unsafe-eval'", // Sometimes needed for Stripe or Mapbox evals
+          'https:',
+          'http:',
+          'blob:',
+          'https://*.mapbox.com',
+          'https://js.stripe.com',
+          'https://m.stripe.network',
+          'https://*.cloudflare.com',
+          'https://vercel.live'
+        ],
+        frameSrc: ["'self'", 'https://js.stripe.com'], // Allow Stripe frame for payments
+        objectSrc: ["'none'"], // Disable embedding object elements
+        styleSrc: ["'self'", 'https:', "'unsafe-inline'"], // Allow inline styles
+        workerSrc: [
+          "'self'",
+          'data:',
+          'blob:',
+          'https://*.tiles.mapbox.com',
+          'https://api.mapbox.com',
+          'https://events.mapbox.com',
+          'https://m.stripe.network',
+          'https://vercel.live'
+        ],
+        childSrc: ["'self'", 'blob:'], // Allow self-hosted and blob sources for iframes
+        imgSrc: ["'self'", 'data:', 'blob:', 'https:'], // Allow secure image sources
+        formAction: ["'self'"], // Form submissions only allowed to self
+        connectSrc: [
+          "'self'",
+          'data:',
+          'blob:',
+          "'unsafe-inline'",
+          'https://*.stripe.com',
+          'https://*.mapbox.com',
+          'https://*.cloudflare.com/',
+          'https://bundle.js:*', // Allow bundling through various ports
+          'ws://localhost:*', // Allow WebSocket connections on localhost
+          'wss://*' // Allow secure WebSocket connections if needed
+        ],
+        upgradeInsecureRequests: [] // Optional: Forces all requests over HTTPS
+      }
+    }
+  })
+);
 
-// 2) set Limite reqs from same API
+// 2) set Limit reqs from same API
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000, // this means 100 req per one hour for the same ip
